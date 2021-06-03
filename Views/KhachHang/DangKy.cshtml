@@ -1,0 +1,81 @@
+﻿@model BookStore.Models.KHACHHANG
+
+@{
+    ViewBag.Title = "DangKy";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<table align="center" style="font-size: 16px;">
+    <h2 style="text-align: center">Sign in</h2>
+    @using (Html.BeginForm())
+    {
+        @Html.ValidationSummary(true)
+        <tr style="height: 40px">
+            <td>Name</td>
+            <td>
+                @Html.TextBox("Hoten")
+                @ViewData["Loi1"]
+            </td>
+        </tr>
+        <tr style="height: 40px">
+            <td>Username</td>
+            <td>
+                @Html.TextBox("Taikhoan")
+                @ViewData["Loi2"]
+            </td>
+        </tr>
+        <tr style="height: 40px">
+            <td>Password</td>
+            <td>
+                @Html.TextBox("Matkhau")
+                @ViewData["Loi3"]
+            </td>
+        </tr>
+        <tr style="height: 40px">
+            <td>Confirm Password</td>
+            <td>
+                @Html.TextBox("Matkhaunhaplai")
+                @ViewData["Loi4"]
+            </td>
+        </tr>
+        <tr style="height: 40px">
+            <td>Address</td>
+            <td>
+                @Html.TextBox("DiachiKH")
+                @ViewData["Loi5"]
+            </td>
+        </tr>
+        <tr style="height: 40px">
+            <td>Phone Number</td>
+            <td>
+                @Html.TextBox("DienthoaiKH")
+                @ViewData["Loi6"]
+            </td>
+        </tr>
+        <tr style="height: 40px">
+            <td>Date of birth</td>
+            <td>
+                <input type="date" name="Ngaysinh" />
+            </td>
+        </tr>
+        <tr style="height: 40px">
+            <td>Name</td>
+            <td>
+                @Html.TextBox("Email")
+                @ViewData["Loi8"]
+            </td>
+        </tr>
+        <tr style="height: 40px">
+            <td></td>
+            <td>
+                <input type="submit" value="Sign in" />
+            </td>
+        </tr>
+    }
+</table>
+
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

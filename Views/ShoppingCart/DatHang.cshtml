@@ -1,0 +1,86 @@
+﻿@using BookStore.Models
+@model List<Cart>
+@{
+    ViewBag.Title = "DatHang";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 style="text-align: center">Thong tin san pham dat mua</h2>
+<table align="center" border="1" style="color: black">
+        <tr style="text-align: center; font-weight:bold">
+            <th>Ma sản phẩm</th>
+            <th>Ten sản phẩm</th>
+            <th>Hình sản phẩm</th>
+            <th>Số lượng</th>
+            <th>Gía</th>
+            <th>Thành tiền</th>
+            <th></th>
+        </tr>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.idMasach</td>
+                <td>@item.sTensach</td>
+                <td><a href="@Url.Action("Details", "BookStore", new { id = item.idMasach})"><img src="~/Content/Images/@item.sAnhbia" height="100" width="70" /></a></td>
+                <td>@item.iSoluong</td>
+                <td>@item.dDongia</td>
+                <td>@item.dThanhtien</td>
+            </tr>
+        }
+        <tr>
+            <td colspan="3" style="text-align: right">Tổng số lượng @String.Format("{0:0,0}", ViewBag.TongSoLuong)</td>
+            <td colspan="3" style="text-align: right">Tổng tiền: @String.Format("{0:0,0}", ViewBag.TongTien) VND</td>
+
+        </tr>
+        <tr>
+            <td colspan="8" style="font-weight: bold;text-align: center;color:blue">
+                @Html.ActionLink("Countinues Shopping", "GioHang", "ShoppingCart")
+            </td>
+        </tr>
+</table>
+
+<h2 style="text-align:center">THONG TIN KHACH HANG</h2>
+@{ 
+    KHACHHANG kh = (KHACHHANG)Session["Taikhoan"];
+}
+<table>
+    @using (Html.BeginForm())
+    {
+        @Html.ValidationSummary(true)
+        if (kh != null)
+        {
+            <tr style="height: 40px">
+                <td>Name</td>
+                <td style="font-weight:bold">@kh.HoTen</td>
+            </tr>
+            <tr style="height: 40px">
+                <td>Address</td>
+                <td style="font-weight:bold">@kh.DiachiKH</td>
+            </tr>
+            <tr style="height: 40px">
+                <td>Phone Number</td>
+                <td style="font-weight:bold">@kh.DienthoaiKH</td>
+            </tr>
+            <tr style="height: 40px">
+                <td>Date Order</td>
+                <td style="font-weight:bold">@DateTime.Now.ToShortDateString()</td>
+            </tr>
+            <tr style="height: 40px">
+                <td>Date Ship</td>
+                <td style="font-weight:bold">
+                    <input type="date" name="NgayGiao" />
+                    <span style="color: red">@ViewData["Loi1"]</span>
+                </td>
+            </tr>
+            <tr style="height: 40px">
+                <td></td>
+                <td style="font-weight: bold">
+                    <input type="submit" value="Submit Order" />
+                </td>
+            </tr>
+        }
+
+
+    }
+
+</table>

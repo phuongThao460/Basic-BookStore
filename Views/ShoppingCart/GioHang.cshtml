@@ -1,0 +1,59 @@
+﻿
+@{
+    ViewBag.Title = "GioHang";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>GioHang</h2>
+@if (Model != null)
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Ma sản phẩm</th>
+                <th>Ten sản phẩm</th>
+                <th>Hình sản phẩm</th>
+                <th>Số lượng</th>
+                <th>Gía</th>
+                <th>Thành tiền</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+            <tr>
+                <td>@item.idMasach</td>
+                <td><a href="@Url.Action("Details", "BookStore", new { id = item.idMasach})"><img src="~/Content/Images/@item.sAnhbia" height="100" width="70" /></a></td>
+                <td>@item.sTensach</td>
+                @using (Html.BeginForm("CapNhatGioHang", "ShoppingCart"))
+                {
+                    <td>
+                        <input type="number" min="1" value="@item.iSoluong" name="txtSoLuong" />
+                        <input type="submit" value="Update" />
+                    </td>
+                    <td>@item.dDongia</td>
+                    <td>@item.dThanhtien</td>
+
+                }
+                <td>@Html.FormatValue(item.dDongia, "{0:#,###}")</td>
+                <td>@Html.FormatValue(item.dThanhtien, "{0:#,###}")</td>
+                <td>@Html.ActionLink("Delete", "XoaGioHang", new { @Masach = item.idMasach })</td>
+
+            </tr>
+            }
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="3" style="text-align: right">Tổng số lượng @String.Format("{0:0,0}", ViewBag.TongSoLuong)</td>
+                <td colspan="3" style="text-align: right">Tổng tiền: @String.Format("{0:0,0}", ViewBag.TongTien) VND</td>
+                
+            </tr>
+            <tr>
+                <td colspan="8" style="font-weight: bold;text-align: center;font-size: 20px">
+                    @Html.ActionLink("ORDER", "DatHang", "ShoppingCart")
+                </td>
+            </tr>
+        </tfoot>
+    </table>
+}

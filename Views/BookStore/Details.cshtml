@@ -1,0 +1,24 @@
+﻿@model BookStore.Models.ViewSanPham
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="row" style="height: 30px; background-color: darkkhaki">
+    <p style="text-align: center; font-size: 25px; color: red;"><b>DETAIL OF BOOK</b></p>
+</div>
+<div class="row">
+    <div class="col-sm-3" style="padding: 0px; border: 1px">
+        <div>
+           <img src="~/Content/Images/@Model.Anhbia" width="150" style="text-align: center; height: 200px;" />
+        </div>
+    </div>
+    <div class="col-sm-9" style="font-size: 16px; padding:5px;background-color: white">
+        <p style="font-size: 30px; color: dodgerblue">@Model.Tensach</p>
+        <p style="font-size: 20px; color: burlywood">Supplier: @Model.TenNXB</p>    
+        <p style="font-size: 16px">Detail: @Model.Mota</p>
+        <p style="font-size: 30px; font-weight: bold">Price: @string.Format("{0:#,##0.##}", Model.Giaban)</p>
+    </div>
+</div>
+<div class="datmua" style="color: red; font-size: 18px; font-weight: bold; text-align: center;">
+    <a href="@Url.Action("Themgiohang", "ShoppingCart", new { @iMasach = @Model.Masach, @strUrl = Request.Url.ToString()})" class="list-group-item">Buy</a>
+</div>
